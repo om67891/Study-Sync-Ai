@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /planner
+Disallow: /study-plan/
+
+Sitemap: https://studysync-ai.vercel.app/sitemap.xml
