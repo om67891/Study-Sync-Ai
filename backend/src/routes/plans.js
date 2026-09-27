@@ -66,13 +66,27 @@ router.post('/generate', requireAuth, async (req, res, next) => {
     }
 
     // 1. Check trials before generation
-    const { data: profile, error: profileError } = await supabase
+    let { data: profile, error: profileError } = await supabase
       .from('profiles')
       .select('trials_remaining, total_free_trials, trials_used')
       .eq('id', userId)
-      .single();
+      .maybeSingle();
 
-    if (profileError) throw new Error('Failed to fetch user profile');
+    if (profileError || !profile) {
+      // If profile doesn't exist, we can assume default trials
+      profile = {
+        trials_remaining: 3,
+        total_free_trials: 3,
+        trials_used: 0
+      };
+      
+      // Optionally create it to prevent future issues
+      try {
+        await supabase.from('profiles').insert({ id: userId, trials_remaining: 3, total_free_trials: 3 });
+      } catch (e) {
+        console.error('Failed to auto-create profile:', e.message);
+      }
+    }
     
     if (profile.trials_remaining <= 0) {
       return res.status(403).json({

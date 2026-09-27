@@ -24,10 +24,10 @@ function Dashboard() {
           .from('profiles')
           .select('*')
           .eq('id', user.id)
-          .single();
+          .maybeSingle();
 
-        if (error) {
-          throw error;
+        if (error || !data) {
+          throw new Error('Profile not found or error occurred');
         }
         
         setProfile(data);
