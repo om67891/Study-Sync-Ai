@@ -6,7 +6,7 @@ import { Calendar, Zap, Star, CheckCircle } from 'lucide-react';
 import { trackEvent } from '../lib/analytics';
 
 function Dashboard() {
-  const { user } = useAuth();
+  const { user, session } = useAuth();
   const [profile, setProfile] = useState(null);
   const [recentPlans, setRecentPlans] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -242,7 +242,7 @@ function Dashboard() {
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>Upgrade to Premium for unlimited generations and advanced planning.</p>
             </div>
           </div>
-          <button className="btn btn-secondary">Explore Premium</button>
+          <Link to="/pricing" className="btn btn-secondary">Explore Premium</Link>
         </div>
       )}
 

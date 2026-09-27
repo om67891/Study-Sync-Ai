@@ -17,6 +17,8 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import Planner from './pages/Planner';
 import StudyPlanView from './pages/StudyPlanView';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import { initAnalytics, trackPageView } from './lib/analytics';
 
 function AnalyticsTracker() {
@@ -77,6 +79,8 @@ function App() {
             {/* Auth Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
 
             {/* Protected Routes */}
             <Route path="/dashboard" element={

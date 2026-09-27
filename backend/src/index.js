@@ -43,6 +43,21 @@ app.use('/api/plans/generate', generateLimiter);
 app.use('/api/plans', plansRouter);
 app.use('/api', marketingRouter);
 
+app.post('/api/contact', async (req, res, next) => {
+  try {
+    const { name, email, subject, message } = req.body;
+    if (!name || !email || !message) {
+      return res.status(400).json({ success: false, message: 'Missing required fields' });
+    }
+    
+    // In a real app, you would save this to the DB or send an email.
+    // For now, we'll just mock a success response.
+    res.json({ success: true, message: 'Message sent successfully' });
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     success: true,
