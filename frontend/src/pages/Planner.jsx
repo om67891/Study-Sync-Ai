@@ -23,6 +23,7 @@ function Planner() {
   const [currentStep, setCurrentStep] = useState(1);
   const [error, setError] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
+  const [generatingMsg, setGeneratingMsg] = useState('Building your personalized plan...');
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -129,28 +130,42 @@ function Planner() {
 
   const generatePlan = async () => {
     setIsGenerating(true);
+    setGeneratingMsg('Waking up AI engine...');
     setError('');
     trackEvent('schedule_generation_start');
+
+    // Show progressive messages to indicate backend cold-start
+    const msgTimer1 = setTimeout(() => setGeneratingMsg('Building your personalized plan...'), 8000);
+    const msgTimer2 = setTimeout(() => setGeneratingMsg('Almost there, AI is generating your schedule...'), 20000);
+    const msgTimer3 = setTimeout(() => setGeneratingMsg('This is taking a bit longer than usual, please wait...'), 40000);
+
     try {
+      if (!session?.access_token) {
+        throw new Error('You must be logged in to generate a plan.');
+      }
+
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/plans/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session?.access_token}`
+          'Authorization': `Bearer ${session.access_token}`
         },
         body: JSON.stringify(formData)
       });
 
+      const result = await response.json();
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to generate study plan');
+        if (response.status === 403 && result.code === 'NO_TRIALS_REMAINING') {
+          trackEvent('trial_exhausted_blocked');
+          throw new Error('You have used all your free study-plan trials. Please upgrade to Premium.');
+        }
+        throw new Error(result.message || 'Failed to generate study plan');
       }
 
-      const result = await response.json();
       trackEvent('schedule_generation_success');
-      
-      // If trials exhausted, track it
-      if (result.data.trial.trials_remaining === 0) {
+
+      if (result.data?.trial?.trials_remaining === 0) {
         trackEvent('trial_exhausted', { total_trials: result.data.trial.total_free_trials });
       }
 
@@ -159,6 +174,9 @@ function Planner() {
       trackEvent('schedule_generation_failure', { error_code: err.message });
       setError(err.message || 'An error occurred while generating your plan. Please try again.');
     } finally {
+      clearTimeout(msgTimer1);
+      clearTimeout(msgTimer2);
+      clearTimeout(msgTimer3);
       setIsGenerating(false);
     }
   };
@@ -412,10 +430,11 @@ function Planner() {
 
   if (isGenerating) {
     return (
-      <div className="container section" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh' }}>
+      <div className="container section" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: '16px', textAlign: 'center' }}>
         <div style={{ width: '64px', height: '64px', border: '4px solid var(--bg-main)', borderTopColor: 'var(--primary-main)', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
-        <h2 style={{ marginTop: '32px', marginBottom: '8px' }}>Building your personalized plan...</h2>
-        <p style={{ color: 'var(--text-secondary)' }}>Our AI is analyzing your goals and availability.</p>
+        <h2 style={{ marginTop: '16px', marginBottom: '4px' }}>{generatingMsg}</h2>
+        <p style={{ color: 'var(--text-secondary)', maxWidth: '400px' }}>Our AI is analyzing your goals and availability. The first request may take up to 60 seconds if the server is waking up.</p>
+        <p style={{ fontSize: '0.75rem', color: 'var(--text-light)', marginTop: '8px' }}>⚡ Do not close this page</p>
         <style>{`
           @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         `}</style>
