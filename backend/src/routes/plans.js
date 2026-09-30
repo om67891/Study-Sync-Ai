@@ -156,7 +156,7 @@ Ensure the schedule ONLY uses the Available Days and spreads the subjects accord
         custom_goal: formData.customGoal || null,
         subjects: formData.subjects,
         priority_subjects: formData.prioritySubjects || [],
-        knowledge_level: formData.knowledgeLevel,
+        knowledge_level: formData.knowledgeLevel.toLowerCase(),
         duration_value: parseInt(formData.durationValue),
         duration_unit: formData.durationUnit.toLowerCase(),
         daily_study_hours: parseFloat(formData.dailyStudyHours),
