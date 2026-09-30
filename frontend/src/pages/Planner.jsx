@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { ArrowLeft, ArrowRight, Check, AlertCircle, Calendar } from 'lucide-react';
 import { trackEvent } from '../lib/analytics';
+import { supabase } from '../lib/supabase';
 
 const steps = [
   { id: 1, title: 'Study Goal' },
@@ -144,11 +145,23 @@ function Planner() {
         throw new Error('You must be logged in to generate a plan.');
       }
 
+      // Always refresh the session before making the API call to prevent
+      // "Invalid token" errors from expired JWTs
+      let accessToken = session.access_token;
+      try {
+        const { data: refreshData } = await supabase.auth.refreshSession();
+        if (refreshData?.session?.access_token) {
+          accessToken = refreshData.session.access_token;
+        }
+      } catch (refreshErr) {
+        console.warn('Session refresh failed, using existing token');
+      }
+
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/plans/generate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.access_token}`
+          'Authorization': `Bearer ${accessToken}`
         },
         body: JSON.stringify(formData)
       });
