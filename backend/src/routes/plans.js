@@ -24,6 +24,9 @@ async function ensureProfile(userId) {
     .from('profiles')
     .insert({
       id: userId,
+      first_name: '',
+      last_name: '',
+      email: '',
       trials_remaining: 3,
       total_free_trials: 3,
       trials_used: 0,
