@@ -15,7 +15,8 @@ async function run() {
       '../supabase_setup.sql',
       '../supabase_setup_part2.sql',
       '../supabase_setup_part3.sql',
-      '../supabase_setup_part4.sql'
+      '../supabase_setup_part4.sql',
+      '../supabase_drop_constraints.sql'
     ];
 
     for (const file of files) {
