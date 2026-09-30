@@ -218,6 +218,7 @@ Ensure the schedule ONLY uses the Available Days and spreads the subjects accord
         duration_value: parseInt(formData.durationValue),
         duration_unit: formData.durationUnit.toLowerCase(),
         plan_data: {},
+        schedule: {},
         status: 'failed',
         error_message: genError.message,
         model_name: modelName
