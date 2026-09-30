@@ -158,7 +158,7 @@ Ensure the schedule ONLY uses the Available Days and spreads the subjects accord
         priority_subjects: formData.prioritySubjects || [],
         knowledge_level: formData.knowledgeLevel,
         duration_value: parseInt(formData.durationValue),
-        duration_unit: formData.durationUnit,
+        duration_unit: formData.durationUnit.toLowerCase(),
         daily_study_hours: parseFloat(formData.dailyStudyHours),
         preferred_study_times: formData.preferredStudyTimes || [],
         available_days: formData.availableDays || [],
@@ -213,7 +213,7 @@ Ensure the schedule ONLY uses the Available Days and spreads the subjects accord
         title: `${formData.durationValue} ${formData.durationUnit} ${goalText}`,
         goal: goalText,
         duration_value: parseInt(formData.durationValue),
-        duration_unit: formData.durationUnit,
+        duration_unit: formData.durationUnit.toLowerCase(),
         plan_data: {},
         status: 'failed',
         error_message: genError.message,
@@ -231,7 +231,7 @@ Ensure the schedule ONLY uses the Available Days and spreads the subjects accord
       p_title: planTitle,
       p_goal: goalText,
       p_duration_value: parseInt(formData.durationValue),
-      p_duration_unit: formData.durationUnit,
+      p_duration_unit: formData.durationUnit.toLowerCase(),
       p_plan_data: generatedJSON,
       p_model_name: modelName
     });
