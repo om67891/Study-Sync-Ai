@@ -174,7 +174,7 @@ Ensure the schedule ONLY uses the Available Days and spreads the subjects accord
       return res.status(500).json({ success: false, message: 'Failed to save questionnaire data: ' + qError.message });
     }
 
-    const modelName = process.env.GROQ_MODEL || 'llama-3.1-8b-instant';
+    const modelName = process.env.GROQ_MODEL || 'openai/gpt-oss-20b';
     let generatedJSON;
 
     try {
