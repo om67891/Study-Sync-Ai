@@ -157,7 +157,7 @@ function StudyPlanView() {
           </Link>
           
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <h1 style={{ fontSize: '3rem', fontWeight: 800, marginBottom: '24px', letterSpacing: '-0.02em', lineHeight: 1.2 }}>{plan.title}</h1>
+            <h1 style={{ fontSize: 'clamp(1.6rem, 4vw, 3rem)', fontWeight: 800, marginBottom: '24px', letterSpacing: '-0.02em', lineHeight: 1.2 }}>{plan.title}</h1>
             
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(10px)', padding: '8px 16px', borderRadius: '100px', fontSize: '0.95rem', fontWeight: 500 }}>
@@ -198,16 +198,19 @@ function StudyPlanView() {
           style={{ maxWidth: '900px', margin: '0 auto 60px' }}
         >
           {schedule.map((day, index) => (
-            <motion.div key={index} variants={itemVariants} style={{ display: 'flex', gap: '32px', marginBottom: '40px' }}>
-              {/* Left Column: Date */}
-              <div style={{ flex: '0 0 140px', textAlign: 'right', paddingTop: '8px' }}>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--primary-dark)', margin: 0 }}>{day.day}</h3>
-                {day.date && <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: '4px 0 0 0', fontWeight: 500 }}>{day.date}</p>}
+            <motion.div key={index} variants={itemVariants} className="plan-timeline" style={{ marginBottom: '32px' }}>
+              {/* Date column */}
+              <div className="plan-timeline-date">
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 700, color: 'var(--primary-dark)', margin: 0 }}>{day.day}</h3>
+                {day.date && <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', margin: '4px 0 0 0', fontWeight: 500 }}>{day.date}</p>}
               </div>
-              
-              {/* Middle Column: Timeline Line */}
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <div style={{ width: '16px', height: '16px', borderRadius: '50%', background: 'var(--primary-main)', border: '4px solid #e0e7ff', zIndex: 2 }} />
+              {/* Connector column */}
+              <div className="plan-timeline-connector">
+                <div style={{ width: '16px', height: '16px', borderRadius: '50%', background: 'var(--primary-main)', border: '4px solid #e0e7ff', zIndex: 2, flexShrink: 0 }} />
+                {index < schedule.length - 1 && <div style={{ width: '2px', flex: 1, background: 'linear-gradient(to bottom, #e0e7ff, #c7d2fe)', marginTop: '4px', borderRadius: '2px' }} />}
+              </div>
+              {/* Activities column */}
+              <div className="plan-timeline-content" style={{ display: 'grid', gap: '16px' }}>
                 {index < schedule.length - 1 && (
                   <div style={{ width: '2px', height: '100%', background: 'linear-gradient(to bottom, #e0e7ff, #c7d2fe)', marginTop: '4px', borderRadius: '2px' }} />
                 )}
