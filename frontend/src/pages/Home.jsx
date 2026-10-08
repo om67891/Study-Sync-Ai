@@ -18,9 +18,9 @@ function Home() {
           <Link to="/how-it-works" className="btn btn-secondary" style={{ padding: '16px 32px', fontSize: '1.125rem' }}>See How It Works</Link>
         </div>
         
-        {/* Product Preview Video (Mobile Ratio) */}
-        <div style={{ marginTop: '64px', display: 'flex', justifyContent: 'center' }}>
-          <div style={{ width: '100%', maxWidth: '320px', borderRadius: '32px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', border: '12px solid #0f172a', background: 'black' }}>
+        {/* Product Preview Video */}
+        <div style={{ marginTop: '64px', display: 'flex', justifyContent: 'center', padding: '0 16px' }}>
+          <div style={{ width: '100%', maxWidth: '900px', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', border: '1px solid rgba(0,0,0,0.1)', background: 'black' }}>
              <video src="/Reel2.mp4" autoPlay loop muted playsInline style={{ width: '100%', height: 'auto', display: 'block' }} />
           </div>
         </div>
