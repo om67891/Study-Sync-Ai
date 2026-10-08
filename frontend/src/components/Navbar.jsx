@@ -18,7 +18,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px' }}>
         <Link to={isAuthenticated ? "/dashboard" : "/"} className="nav-brand">
-          <div style={{ width: '24px', height: '24px', borderRadius: '4px', background: 'var(--gradient-primary)' }}></div>
+          <img src="/logo.png" alt="StudySync AI Logo" style={{ width: '36px', height: '36px', objectFit: 'contain' }} />
           StudySync AI
         </Link>
 

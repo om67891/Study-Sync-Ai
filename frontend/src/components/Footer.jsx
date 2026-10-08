@@ -6,7 +6,10 @@ function Footer() {
     <footer style={{ background: 'var(--primary-dark)', color: 'var(--text-light)', padding: '60px 0 24px', marginTop: '80px' }}>
       <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '40px', marginBottom: '40px' }}>
         <div>
-          <div className="nav-brand" style={{ color: 'white', marginBottom: '16px' }}>StudySync AI</div>
+          <div className="nav-brand" style={{ color: 'white', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <img src="/logo.png" alt="StudySync AI Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
+            StudySync AI
+          </div>
           <p>Plan Better. Study Smarter. The AI-powered study scheduling platform for students.</p>
         </div>
         <div>
