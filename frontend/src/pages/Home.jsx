@@ -18,10 +18,10 @@ function Home() {
           <Link to="/how-it-works" className="btn btn-secondary" style={{ padding: '16px 32px', fontSize: '1.125rem' }}>See How It Works</Link>
         </div>
         
-        {/* Product Preview Image (Mobile Ratio) */}
+        {/* Product Preview Video (Mobile Ratio) */}
         <div style={{ marginTop: '64px', display: 'flex', justifyContent: 'center' }}>
-          <div style={{ width: '100%', maxWidth: '320px', borderRadius: '32px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', border: '12px solid #0f172a', background: 'white' }}>
-             <img src="/hero_preview_reel2.jpg" alt="StudySync AI Interface" style={{ width: '100%', height: 'auto', display: 'block' }} />
+          <div style={{ width: '100%', maxWidth: '320px', borderRadius: '32px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', border: '12px solid #0f172a', background: 'black' }}>
+             <video src="/Reel2.mp4" autoPlay loop muted playsInline style={{ width: '100%', height: 'auto', display: 'block' }} />
           </div>
         </div>
       </section>
