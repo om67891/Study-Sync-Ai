@@ -18,9 +18,11 @@ function Home() {
           <Link to="/how-it-works" className="btn btn-secondary" style={{ padding: '16px 32px', fontSize: '1.125rem' }}>See How It Works</Link>
         </div>
         
-        {/* Product Preview Image */}
-        <div style={{ marginTop: '64px', borderRadius: '16px', overflow: 'hidden', boxShadow: 'var(--shadow-hover)', border: '1px solid rgba(0,0,0,0.05)', background: 'white', padding: '12px' }}>
-           <img src="/hero_preview.jpg" alt="StudySync AI Interface" style={{ width: '100%', height: 'auto', maxHeight: '500px', objectFit: 'cover', borderRadius: '12px', display: 'block' }} />
+        {/* Product Preview Image (Mobile Ratio) */}
+        <div style={{ marginTop: '64px', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ width: '100%', maxWidth: '320px', borderRadius: '32px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)', border: '12px solid #0f172a', background: 'white' }}>
+             <img src="/hero_preview_reel2.jpg" alt="StudySync AI Interface" style={{ width: '100%', height: 'auto', display: 'block' }} />
+          </div>
         </div>
       </section>
 
