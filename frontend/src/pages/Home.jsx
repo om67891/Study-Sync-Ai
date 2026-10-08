@@ -18,11 +18,9 @@ function Home() {
           <Link to="/how-it-works" className="btn btn-secondary" style={{ padding: '16px 32px', fontSize: '1.125rem' }}>See How It Works</Link>
         </div>
         
-        {/* Placeholder for dashboard preview image */}
-        <div style={{ marginTop: '64px', borderRadius: '16px', overflow: 'hidden', boxShadow: 'var(--shadow-hover)', border: '1px solid rgba(0,0,0,0.05)', background: 'white', padding: '8px' }}>
-           <div style={{ background: 'var(--bg-main)', borderRadius: '12px', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-light)' }}>
-             Product Preview Image
-           </div>
+        {/* Product Preview Image */}
+        <div style={{ marginTop: '64px', borderRadius: '16px', overflow: 'hidden', boxShadow: 'var(--shadow-hover)', border: '1px solid rgba(0,0,0,0.05)', background: 'white', padding: '12px' }}>
+           <img src="/hero_preview.jpg" alt="StudySync AI Interface" style={{ width: '100%', height: 'auto', maxHeight: '500px', objectFit: 'cover', borderRadius: '12px', display: 'block' }} />
         </div>
       </section>
 

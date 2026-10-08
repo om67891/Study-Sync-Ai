@@ -36,8 +36,8 @@ function Footer() {
       <div className="container" style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
         <p>&copy; 2026 StudySync AI. All rights reserved.</p>
         <div style={{ display: 'flex', gap: '16px' }}>
-          <a href="#" style={{ color: 'var(--text-light)' }}>Instagram</a>
-          <a href="#" style={{ color: 'var(--text-light)' }}>Facebook</a>
+          <a href="https://www.instagram.com/studysyncai123/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-light)', transition: 'color 0.2s' }} onMouseOver={e => e.currentTarget.style.color='var(--primary-light)'} onMouseOut={e => e.currentTarget.style.color='var(--text-light)'}>Instagram</a>
+          <a href="https://www.facebook.com/profile.php?id=61594933902640" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-light)', transition: 'color 0.2s' }} onMouseOver={e => e.currentTarget.style.color='var(--primary-light)'} onMouseOut={e => e.currentTarget.style.color='var(--text-light)'}>Facebook</a>
         </div>
       </div>
     </footer>
